@@ -1,0 +1,28 @@
+#fichier utilisé pour définir les paramètres utilisés par le programme gen.py.
+#les lignes commençant par un # sont ignorées.
+#pour générer des noms avec d'autres paramètres, modifier ce fichier ou en créer un autre
+#(peu importe le nom) avec le même patern.
+#
+#un paramètre est annoncé par un ~
+#
+#letters dit au programme que la ligne qui suit contient les lettres à utiliser:
+#avant le tiret, les voyelles, après les consonnes (attention à ne pas ajouter d'espace).
+#
+#syllabes permet de dire au programme d'utiliser une sélection de syllabes pour générer des nom
+#elles sont séparées par un tiret (attention à ne pas ajouter d'espace).
+#pour ne pas utiliser de syllabes, la ligne suivant le mot clé doit contenir uniquement
+#/NONE/
+#
+#les caractères // servent à dire au programme que le dernier paramètre "ouvert" se termine ici.
+#
+#UN FICHIER DOIT TOUJOURS FINIR PAR UNE LIGNE CONTENANT UNIQUEMENT LE MOT CLE END
+
+~letters
+aeiouy-bcdfghjklmnpqrstvwxz
+//
+
+~syllabes
+/NONE/
+//
+
+END

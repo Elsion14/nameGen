@@ -4,20 +4,17 @@ from random import *
 import os
 
 
-isto_voyelles = ["a","e","i","o","y"]
-isto_consonnes = ["c","d","l","m","n","r","s","t","v"]
-isto_syl = ["ter", "les", "las", "yl", "ac", "ni"];
+def main(path):
+    list_voyelles, list_consonnes, list_syllabes = fileReader(path);
 
-
-def main():
-    isto_list = create_list(isto_voyelles, isto_consonnes);
+    isto_list = create_list(list_voyelles, list_consonnes);
     
-    fichier = open("resources/2syl.txt","w");
+    fichier = open(path[:-4]+"2syl.txt","w");
     for i in range(0,100):
         fichier.write(create_name(isto_list,2)+"\n");
     fichier.close();
 
-    fichier = open("resources/3syl.txt","w");
+    fichier = open(path[:-4]+"3syl.txt","w");
     for i in range (0,100):
         fichier.write(create_name(isto_list,3)+"\n");
     fichier.close();
@@ -100,4 +97,35 @@ def create_name(syllabes, i):
     return name;
 
 
-main();
+def fileReader(path):
+    file = open(path,"r");
+    line = file.readline();
+    list_voyelles = [];
+    list_consonnes = [];
+    list_syllabes = [];
+    while line != "END":
+        if line[0] == "#":
+            line = file.readline();
+            continue;
+        elif line[0] == "~":
+            if line[1:] == "letters\n":
+                line = file.readline();
+                list_voyelles = list(line.split("-")[0]);
+                list_consonnes = list(line.split("-")[1]);
+                if list_consonnes[-1] == "\n":
+                    del list_consonnes[-1];
+            elif line[1:] == "syllabes\n":
+                line = file.readline();
+                if line != "/NONE/\n":
+                    list_syllabes = line.split("-");
+                    tmp = list(list_syllabes[-1])
+                    if tmp[-1] == "\n":
+                        del tmp[-1];
+                        list_syllabes[-1] = "".join(tmp);
+        line = file.readline();
+    file.close();
+    return list_voyelles, list_consonnes, list_syllabes;
+    
+
+
+main("resources/generate.txt");
